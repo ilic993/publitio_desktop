@@ -13,12 +13,14 @@ class UIButtons:
         label = customtkinter.CTkLabel(container, text=labelText, compound="left", font=customtkinter.CTkFont(size=15, weight="bold"))
         label.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
 
-        button = customtkinter.CTkButton(container, text="Settings", command=self.quitButtonHandle, anchor="CENTER")
+        button = customtkinter.CTkButton(container, text="Settings", command=self.openSettings, anchor="CENTER")
         button.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
 
         button = customtkinter.CTkButton(container, text="Exit", width=70, command=self.quitButtonHandle, anchor="ES")
         button.grid(row=2, column=1, padx=10, pady=10)
 
-
     def quitButtonHandle(self):
         quit()
+
+    def openSettings(self):
+        self.master.openSettings()

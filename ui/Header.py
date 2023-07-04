@@ -2,6 +2,7 @@ import customtkinter
 import os
 from PIL import Image
 import webbrowser
+from utils.Config import Config
 
 class Header:
     def __init__(self, master):
@@ -20,11 +21,14 @@ class Header:
 
         # Theme switcher
         theme_switcher = customtkinter.CTkOptionMenu(header_frame, values=["Light", "Dark", "System"], width=100, command=self.changeTheme)
-        theme_switcher.set("Dark")
+        self.config = Config()
+        theme = self.config.readSetting('theme')
+        theme_switcher.set(theme)
 
         publitio_branding.grid(row=0, column=0, sticky="W", padx=10, pady=10)
         theme_switcher.grid(row=0, column=0, sticky="E", padx=10, pady=10)
 
     def changeTheme(self, newTheme):
+        self.config.changeSetting('theme', newTheme)
         customtkinter.set_appearance_mode(newTheme)
 
