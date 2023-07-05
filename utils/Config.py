@@ -1,5 +1,6 @@
 import configparser
 import os
+from publitio import PublitioAPI
 
 class Config:
     def __init__(self):
@@ -28,6 +29,10 @@ class Config:
             return False
 
         # Check validity of keys
+        publitio_api = PublitioAPI(key=api_key, secret=api_secret)
+        data = publitio_api.list_files(limit=1)
+        if(data['success'] == False):
+            return False
 
         return True
 
@@ -36,6 +41,7 @@ class Config:
         return self.config.get('UserSettings', key)
 
     def changeSetting(self, key, value):
+        self.config.read(self.settings_file)
         self.config.set('UserSettings', key, value)
 
         with open(self.settings_file, 'w') as configfile:

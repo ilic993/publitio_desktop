@@ -5,6 +5,11 @@ from ui.Settings import Settings
 class App(customtkinter.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # bring to front (for restart purpose)
+        self.attributes("-topmost", True)
+        self.attributes("-topmost", False)
+
         config = Config()
         theme = config.readSetting('theme')
         customtkinter.set_appearance_mode(theme)  # Modes: system (default), light, dark
@@ -21,8 +26,7 @@ class App(customtkinter.CTk):
         x = (ws/2) - (w/2)
         y = (hs/2) - (h/2)
 
-        # set the dimensions of the screen 
-        # and where it is placed
+        # set the dimensions of the screen and where it is placed
         self.geometry('%dx%d+%d+%d' % (w, h, x, y))
         self.minsize(w, h)
 
@@ -30,13 +34,12 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1000)
         self.columnconfigure(0, weight=1)
-
         self.toplevel_window = None
-
 
     def openSettings(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
             self.toplevel_window = Settings(self)  # create window if its None or destroyed
             self.toplevel_window.after(10, self.toplevel_window.lift)
+            self.toplevel_window.after(10, self.toplevel_window.focus)
         else:
             self.toplevel_window.focus()  # if window exists focus it

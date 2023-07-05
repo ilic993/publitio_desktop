@@ -1,6 +1,6 @@
 import customtkinter
 
-class UIButtons:
+class SettingsWarning:
     def __init__(self, master):
         self.master = master
 
@@ -9,7 +9,7 @@ class UIButtons:
         container.columnconfigure(0, weight=1000)
         container.grid_rowconfigure(1, weight=1)
 
-        labelText = "Please input your API secret and API key.\n\n\n\n\n"        
+        labelText = "Please input your valid API secret and API key.\n\n\n\n\n"
         label = customtkinter.CTkLabel(container, text=labelText, compound="left", font=customtkinter.CTkFont(size=15, weight="bold"))
         label.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
 

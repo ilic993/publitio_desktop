@@ -26,9 +26,16 @@ class Header:
         theme_switcher.set(theme)
 
         publitio_branding.grid(row=0, column=0, sticky="W", padx=10, pady=10)
-        theme_switcher.grid(row=0, column=0, sticky="E", padx=10, pady=10)
+        theme_switcher.grid(row=0, column=0, sticky="E", padx=(10, 50), pady=10)
+
+        settings_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "settings-b.png")), size=(18, 18))
+        settings = customtkinter.CTkButton(header_frame, text="", image=settings_image, command=self.openSettings, anchor="CENTER", width=30)
+        settings.grid(row=0, column=0, sticky="E", padx=10, pady=10)
 
     def changeTheme(self, newTheme):
         self.config.changeSetting('theme', newTheme)
         customtkinter.set_appearance_mode(newTheme)
+
+    def openSettings(self):
+        self.master.openSettings()
 
